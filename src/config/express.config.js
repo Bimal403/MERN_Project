@@ -1,16 +1,10 @@
 const express = require("express");
 const app = express();
-app.get("/", (request, response) => {
-  response.send("hi");
+const router = require("../router");
+
+app.use("/api/v1", router);
+app.use("/health", (req, res, next) => {
+  res.send("Health Ok");
 });
-app.get("/about", (req, res) => {
-  res.json({
-    meta: null,
-    msg: "hi",
-  });
-});
-app.get("/user/:userId", (req, res) => {
-  let userId = req.params.userId;
-  res.send(userId);
-});
+
 module.exports = app;
